@@ -1,6 +1,6 @@
 [package]
 name = "pokemon"
-version = "1.0.0"
+version = "2.0.0"
 edition = "2021"
 authors = ["Emma Ramirez <ramirez.emma.g@gmail.com>"]
 # respository = "https://github.com/emzinnia/pokemon.git"
@@ -14,3 +14,4 @@ description = "Get Pokémon names"
 serde = { version = "1.0", features = ["derive"] }
 csv = "1.3"
 rand = "0.8"
+ 
