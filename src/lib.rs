@@ -1,23 +1,28 @@
-#![deny(missing_docs,
-        missing_debug_implementations, missing_copy_implementations,
-        trivial_casts, trivial_numeric_casts,
-        unsafe_code,
-        unstable_features,
-        unused_import_braces, unused_qualifications)]
+#![deny(
+    missing_docs,
+    missing_debug_implementations,
+    missing_copy_implementations,
+    trivial_casts,
+    trivial_numeric_casts,
+    unsafe_code,
+    unstable_features,
+    unused_import_braces,
+    unused_qualifications
+)]
 //! documentation for pokemon
 //! Yep.
-extern crate serde;
 extern crate csv;
 extern crate rand;
+extern crate serde;
 
 pub mod pokemon {
     //! documentation for pokemon
     //! Yep.
+    use csv;
+    use rand::{thread_rng, Rng};
+    use serde::{Deserialize, Serialize};
     use std::fs::File;
     use std::path::Path;
-    use rand::{thread_rng, Rng};
-    use csv;
-    use serde::{Deserialize, Serialize};
 
     /// The struct for `Pokemon`
     #[derive(Deserialize, Serialize, Clone, Debug)]
@@ -28,11 +33,11 @@ pub mod pokemon {
         genus: Option<String>,
     }
 
-
-
     fn search<P: AsRef<Path>>(file_path: P) -> Vec<Pokemon> {
         let file = File::open(file_path).unwrap();
-        let mut rdr = csv::ReaderBuilder::new().has_headers(true).from_reader(file);
+        let mut rdr = csv::ReaderBuilder::new()
+            .has_headers(true)
+            .from_reader(file);
         rdr.deserialize::<Pokemon>()
             .collect::<Result<Vec<Pokemon>, csv::Error>>()
             .unwrap()
@@ -40,13 +45,15 @@ pub mod pokemon {
 
     fn search_one<P: AsRef<Path>>(file_path: P, index: usize, lang_id: i32) -> Pokemon {
         let file = File::open(file_path).unwrap();
-        let mut rdr = csv::ReaderBuilder::new().has_headers(true).from_reader(file);
+        let mut rdr = csv::ReaderBuilder::new()
+            .has_headers(true)
+            .from_reader(file);
         let rows: Vec<Pokemon> = rdr
             .deserialize::<Pokemon>()
             .collect::<Result<Vec<Pokemon>, csv::Error>>()
             .unwrap();
 
-        let mut pokey:Pokemon = Pokemon {
+        let mut pokey: Pokemon = Pokemon {
             species: 1,
             language: 1,
             name: "Bulbasaur".to_string(),
@@ -61,7 +68,6 @@ pub mod pokemon {
         }
 
         pokey
-
     }
 
     /// Returns all the Pokemon, in each language
@@ -103,5 +109,4 @@ pub mod pokemon {
     pub fn get_name_with_lang(id: usize, lang_id: i32) -> String {
         search_one("data/pokemon.csv", id, lang_id).name
     }
-
 }
