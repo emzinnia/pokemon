@@ -6,7 +6,7 @@
         unused_import_braces, unused_qualifications)]
 //! documentation for pokemon
 //! Yep.
-extern crate rustc_serialize;
+extern crate serde;
 extern crate csv;
 extern crate rand;
 
@@ -17,9 +17,10 @@ pub mod pokemon {
     use std::path::Path;
     use rand::{thread_rng, Rng};
     use csv;
+    use serde::{Deserialize, Serialize};
 
     /// The struct for `Pokemon`
-    #[derive(RustcDecodable, RustcEncodable, Clone, Debug)]
+    #[derive(Deserialize, Serialize, Clone, Debug)]
     pub struct Pokemon {
         species: i32,
         language: i32,
@@ -31,15 +32,19 @@ pub mod pokemon {
 
     fn search<P: AsRef<Path>>(file_path: P) -> Vec<Pokemon> {
         let file = File::open(file_path).unwrap();
-        let mut rdr = csv::Reader::from_reader(file).has_headers(true);
-        let rows:Vec<Pokemon> = rdr.decode().collect::<csv::Result<Vec<Pokemon>>>().unwrap();
-        rows
+        let mut rdr = csv::ReaderBuilder::new().has_headers(true).from_reader(file);
+        rdr.deserialize::<Pokemon>()
+            .collect::<Result<Vec<Pokemon>, csv::Error>>()
+            .unwrap()
     }
 
     fn search_one<P: AsRef<Path>>(file_path: P, index: usize, lang_id: i32) -> Pokemon {
         let file = File::open(file_path).unwrap();
-        let mut rdr = csv::Reader::from_reader(file).has_headers(true);
-        let rows:Vec<Pokemon> = rdr.decode().collect::<csv::Result<Vec<Pokemon>>>().unwrap();
+        let mut rdr = csv::ReaderBuilder::new().has_headers(true).from_reader(file);
+        let rows: Vec<Pokemon> = rdr
+            .deserialize::<Pokemon>()
+            .collect::<Result<Vec<Pokemon>, csv::Error>>()
+            .unwrap();
 
         let mut pokey:Pokemon = Pokemon {
             species: 1,
@@ -76,14 +81,14 @@ pub mod pokemon {
     #[allow(dead_code)]
     pub fn get_random() -> Pokemon {
         let mut rng = thread_rng();
-        search_one("data/pokemon.csv", rng.gen_range::<usize>(1, 802), 9)
+        search_one("data/pokemon.csv", rng.gen_range(1..=1025), 9)
     }
 
     /// Returns a random pokemon with the specified language
     #[allow(dead_code)]
     pub fn get_random_with_lang(lang_id: i32) -> Pokemon {
         let mut rng = thread_rng();
-        search_one("data/pokemon.csv", rng.gen_range::<usize>(1, 802), lang_id)
+        search_one("data/pokemon.csv", rng.gen_range(1..=1025), lang_id)
     }
 
     /// Returns the name of the specified id

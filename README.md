@@ -1,16 +1,12 @@
 # Pokémon ![premierball](media/premier.png)
 
-[![Travis](https://img.shields.io/travis/EmmaRamirez/pokemon.svg?style=flat-square)](https://travis-ci.org/EmmaRamirez/pokemon)
+[![Travis](https://img.shields.io/travis/emzinnia/pokemon.svg?style=flat-square)](https://travis-ci.org/emzinnia/pokemon)
 [![Crates.io](https://img.shields.io/crates/v/pokemon.svg?style=flat-square)](https://crates.io/crates/pokemon)
 ![contributions](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat-square)
 
-### [Master](https://github.com/EmmaRamirez/pokemon/tree/master) | [Stable](https://github.com/EmmaRamirez/pokemon/tree/stable) | [Dev](https://github.com/EmmaRamirez/pokemon/tree/master)
+### [Master](https://github.com/emzinnia/pokemon/tree/master) | [Stable](https://github.com/emzinnia/pokemon/tree/stable) | [Dev](https://github.com/emzinnia/pokemon/tree/master)
 
 A tiny Rust library inspired by [Pokémon](https://github.com/sindresorhus/pokemon), that lets you get Pokémon names.
-
-## Notes
-
-This project is not yet complete and is highly unstable and half-written. Do *not* use it in production, although it'd be weird if your production needed Pokémon names, but, uh, yeah.
 
 ## Installation
 
