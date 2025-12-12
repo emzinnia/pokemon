@@ -1,6 +1,6 @@
 # Pokémon ![premierball](media/premier.png)
 
-[![Travis](https://img.shields.io/travis/emzinnia/pokemon.svg?style=flat-square)](https://travis-ci.org/emzinnia/pokemon)
+[![CI](https://github.com/emzinnia/pokemon/actions/workflows/ci.yml/badge.svg)](https://github.com/emzinnia/pokemon/actions/workflows/ci.yml)
 [![Crates.io](https://img.shields.io/crates/v/pokemon.svg?style=flat-square)](https://crates.io/crates/pokemon)
 ![contributions](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat-square)
 
